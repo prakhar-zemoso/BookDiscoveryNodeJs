@@ -2,17 +2,13 @@ const express = require('express');
 
 const router = express.Router();
 
-var books=[];
+const bookController = require('../controllers/bookController')
 
-router.get("/", (req,res,next)=>{
-    res.send(books);
-});
+//var books=[];
 
-router.post('/',(req,res)=>{
-    const bookDetailEntered = req.body;
-    books.push(bookDetailEntered);
-    res.send(`Book Details has been entered Successfully`);
-});
+router.get("/", bookController.getAllBook);
+
+router.post('/',bookController.addBookData);
 
 module.exports = router;
 

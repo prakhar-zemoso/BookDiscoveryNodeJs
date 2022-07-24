@@ -2,16 +2,14 @@ const express = require('express');
 
 const router = express.Router();
 
+const authorController = require('../controllers/authorController');
+
 let author = [];
 
-router.get("/",(req,res,next)=>{
-    res.send(author);
-})
+router.get("/",authorController.getAllAuthor);
 
-router.post("/",(req,res,next)=>{
-    const authorAdded = req.body;
-    res.send('The author has been added successfully');
-})
+
+router.post("/",authorController.addAuthorData);
 
 
 module.exports = router;
