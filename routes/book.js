@@ -1,16 +1,16 @@
-const express = require('express');
+// const express = require('express');
 
-const router = express.Router();
+// const router = express.Router();
 
-const bookController = require('../controllers/bookController')
+// const bookController = require('../controllers/bookController')
 
-//var books=[];
+// //var books=[];
 
-router.get("/", bookController.getAllBook);
+// router.get("/", bookController.getAllBook);
 
-router.post('/',bookController.addBookData);
+// router.post('/',bookController.addBookData);
 
-module.exports = router;
+// module.exports = router;
 
 
 
