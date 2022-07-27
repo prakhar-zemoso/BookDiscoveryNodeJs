@@ -17,18 +17,17 @@ const book = sequalize.define("book",{
     bookLanguage:{
         type:Sequalize.STRING
     },
-    is_reading:{
-        type: Sequalize.INTEGER
+    isReading:{
+        type: Sequalize.STRING
     },
-    is_recommended:{
-        type: Sequalize.INTEGER
+    isRecommended:{
+        type: Sequalize.STRING
     },
-    is_bookmarked:{
-        type: Sequalize.INTEGER
+    isBookmarked:{
+        type: Sequalize.STRING
     }
 
 })
-
 
 module.exports = book;
 

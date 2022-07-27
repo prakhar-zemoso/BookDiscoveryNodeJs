@@ -1,5 +1,6 @@
-const Author = require("../Models/author")
-
+const Author = require("../Models/author");
+const book = require("../Models/book");
+const Category = require('../Models/category');
 // exports.getAllAuthor=(req,res,next)=>{
 //    Author.fetchAll(author=>{
 //         res.send(author);
@@ -46,7 +47,7 @@ exports.createAuthor = (req,res)=>{
 
 //Retrieve all Tutorials/ find by author Name from the database:
 
-exports.findAll = (req, res) => {
+exports.findAllAuthors = (req, res) => {
     const authorName = req.query.authorName;
   var condition = authorName? { authorName: { [Op.like]: `%${authorName}%` } } : null;
     try {
@@ -88,17 +89,17 @@ exports.update = (req,res)=>{
     }).then(num => {
         if(num==1){
             res.send({
-                message: "Tutorial was updated successfully."
+                message: "Author was updated successfully."
               });
             } else {
               res.send({
-                message: `Cannot update Tutorial with id=${id}. Maybe Tutorial was not found or req.body is empty!`
+                message: `Cannot update Author with id=${id}. Maybe Tutorial was not found or req.body is empty!`
               });
             }
           })
           .catch(err => {
             res.status(500).send({
-              message: "Error updating Tutorial with id=" + id
+              message: "Error updating Author with id=" + id
          });
     })
 }
@@ -128,4 +129,18 @@ exports.delete = (req,res)=>{
        });
        
 }
+
+exports.bookAuthor = (req,res)=>{
+  const authorId = req.params.id;
+    Author.findByPk(authorId, { include: ["book"] })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      console.log(">> Error while finding Author: ", err);
+    });
+  
+}
+
+
 

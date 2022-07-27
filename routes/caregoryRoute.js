@@ -8,6 +8,8 @@ const categoryController = require('../controllers/categoryController');
 router.post('/',categoryController.createAuthor);
 router.get('/',categoryController.findAll);
 router.get('/:id',categoryController.findById);
+router.put('/:id',categoryController.update);
+router.get('/bookscategory/:id',categoryController.findBooksInCategory);
 
 
 module.exports = router;

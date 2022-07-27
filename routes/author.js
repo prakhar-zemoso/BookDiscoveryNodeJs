@@ -10,9 +10,10 @@ let author = [];
 
 
 router.post("/",authorController.createAuthor);
-router.get("/",authorController.findAll);
+router.get("/",authorController.findAllAuthors);
 router.get("/:id",authorController.findOne);
 router.put("/:id",authorController.update);
 router.delete("/:id",authorController.delete);
+router.get("/bookAuthor/:id",authorController.bookAuthor);
 
 module.exports = router;

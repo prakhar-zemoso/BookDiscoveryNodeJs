@@ -52,20 +52,56 @@ exports.findById = (req,res)=>{
         res.send(data);
     }else{
         res.status(404).send({
-            message: `Cannot find Tutorial with id=${id}.`
+            message: `Cannot find Category with id=${id}.`
         })
 
     }
 }).catch(err => {
     res.status(500).send({
-      message: "Error retrieving Tutorial with id=" + id
+      message: "Error retrieving Category with id=" + id
     });
   });
-
 
 }
 
 
-exports.update = (req,res)=>{
-    
+exports.update=(req,res)=>{
+
+    const id = req.params.id;
+    Category.update(req.body,{
+        where:{id:id}
+    }).then(num =>{
+        console.log(num);
+        if(num==1){
+            res.send({
+                message:"Category was updated Successfully"
+            });
+        }
+            else{
+                res.send({
+                    message:`Cannot update Category with id=${id}. Maybe Category was not found or req.body is empty!`
+                })
+            }
+        
+    }).catch(err => {
+        res.status(500).send({
+            message: "Error updating Category with id=" + id
+        });
+    })
+}
+
+
+exports.findBooksInCategory = (req,res)=>{
+    const categoryId = req.params.id;
+
+    Category.findByPk(categoryId,{include:["book"]})
+    .then(data=>{
+        res.send(data);
+    })
+    .catch(err => {
+        res.status(500).send({
+            message: "Error updating Category with id=" + categoryId
+        });
+    });
+
 }

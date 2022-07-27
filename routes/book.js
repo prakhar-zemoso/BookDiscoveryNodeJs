@@ -1,16 +1,22 @@
-// const express = require('express');
+const express = require('express');
 
-// const router = express.Router();
+const router = express.Router();
 
-// const bookController = require('../controllers/bookController')
+const bookController = require('../controllers/bookController')
 
-// //var books=[];
+//var books=[];
 
-// router.get("/", bookController.getAllBook);
+router.get("/", bookController.findAllBooks);
 
-// router.post('/',bookController.addBookData);
+router.post('/',bookController.createBook);
+router.get('/bookAuthor/:id',bookController.findBookByAuthor);
+router.get('/:id',bookController.findBookId);
+router.put('/:id',bookController.updateBook);
+router.get("/reviewsOnBook/:id", bookController.findAllReviewsOnBook);
+router.get("/bookCategory/:id", bookController.findBookCategory);
+router.get("/Reading",bookController.isReading)
 
-// module.exports = router;
+module.exports = router;
 
 
 
