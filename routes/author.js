@@ -6,7 +6,7 @@ const authorController = require('../controllers/authorController');
 
 let author = [];
 
-router.get("/",authorController.getAllAuthor);
+router.get("/",authorController.getAllAuthors);
 
 
 router.post("/",authorController.addAuthorData);

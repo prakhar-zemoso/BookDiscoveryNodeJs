@@ -2,8 +2,6 @@ const { json } = require('body-parser');
 const fs = require('fs');
 const path = require('path');
 
-//Not Using this as we are storing data in the file
-//const book = [];
 
 module.exports = class Book{
 
@@ -14,12 +12,11 @@ module.exports = class Book{
     }
 
     save(){
-        //book.push(this);
-        //Adding data to the file system instead of an array
+        
 
         const book = path.join(path.dirname(process.mainModule.filename),'dataFile','book.json');
 
-        //getting the exsisting file data and then adding it 
+        
         fs.readFile(book,(err,fileContent)=>{
             let books = [];
             if(!err){
@@ -41,7 +38,7 @@ module.exports = class Book{
             }
             cb( JSON.parse(fileContent));
         })
-        // return book;
+        
     }
 
 }

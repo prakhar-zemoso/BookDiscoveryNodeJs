@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-//const author = [];
+
 
 module.exports = class Book{
     constructor(name){

@@ -6,7 +6,7 @@ const bookController = require('../controllers/bookController')
 
 //var books=[];
 
-router.get("/", bookController.getAllBook);
+router.get("/", bookController.getAllBooks);
 
 router.post('/',bookController.addBookData);
 
