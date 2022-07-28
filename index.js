@@ -9,8 +9,8 @@ const user = require('./Models/User');
 const book = require('./Models/book');
 const categoryRoute = require('./routes/caregoryRoute');
 const reviewRoute = require('./routes/review');
-
 const sequelize = require('./util/database');
+
 
 //require('./Models/index')
 const app = express();
@@ -61,7 +61,7 @@ sequelize.sync().then(()=>{
 
 app.use(bodyparser.urlencoded({extended: false}))
 
-//it is use to store the data in the array format
+
 app.use(bodyparser.json());
 
 
@@ -75,16 +75,6 @@ app.use('/review',reviewRoute);
 
 
 
-// --Practicing the course
-// app.use('/addProduct',(req, res,next)=>{
-//     console.log('I am in the middleware 2');
-//     res.send('<form action="/product" method="POST"><input type="text" name = "title"><button type="submit">submit</button></form>');
-// });
-
-// app.use('/product',(req,res,next)=>{
-//     console.log(req.body);
-//     res.redirect('/');
-// })
 
 app.use(express.json());
 app.listen(3030);

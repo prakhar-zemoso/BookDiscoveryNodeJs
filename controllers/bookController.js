@@ -1,7 +1,6 @@
-
+const author = require('../Models/author');
 const Book = require('../Models/book');
-
-
+const category =require('../Models/category.js');
 
 exports.createBook = (req,res)=>{
     if(!(req.body.bookTile && req.body.bookDescription && req.body.bookLanguage)){
@@ -34,15 +33,88 @@ exports.createBook = (req,res)=>{
       });
 }
 
-exports.findBookByAuthor= (req,res)=>{
-  const bookId = req.params.id;
-  Book.findByPk(bookId,{include:["author"]})
-  .then((data)=>{
-    res.send(data);
-  })
-  .catch((err) => {
-    console.log(">> Error while finding book: ", err);
-  });
+exports.bookDetails=(req,res)=>{
+
+  let authorName,category_type;
+  if(("authorName" in req.query && "category_type" in req.query)){
+    category_type = req.query.category_type;
+    authorName = req.query.authorName;
+
+  Book.findAll({include:[{
+                      model :author ,as: "author",
+                      where:{authorName:authorName},
+                      required:"false"
+                    },
+                  {
+                    model :category ,as: "category",
+                      where:{category_type:category_type},
+                      required:"false"
+                   }
+                  ]
+})
+  .then(data => res.send(data))
+  .catch(err => console.error(err));
+}
+else if(("authorName" in req.query )){
+  authorName = req.query.authorName;
+
+Book.findAll({include:[{
+                    model :author ,as: "author",
+                    where:{authorName:authorName},
+                    required:"false"
+                  }
+                ]
+})
+.then(data => res.send(data))
+.catch(err => console.error(err));
+}
+else if( "category_type" in req.query){
+  category_type = req.query.category_type;
+
+Book.findAll({include:[
+                {
+                  model :category ,as: "category",
+                    where:{category_type:category_type},
+                    required:"false"
+                 }
+                ]
+})
+.then(data => res.send(data))
+.catch(err => console.error(err));
+}
+else if(("isReading" in req.query)){
+  isReading = req.query.isReading;
+
+Book.findAll({where:{isReading:isReading}})
+.then(data => res.send(data))
+.catch(err => console.error(err));
+}
+else if(("isRecommended" in req.query)){
+  isRecommended = req.query.isRecommended;
+
+Book.findAll({where:{isRecommended:isRecommended}})
+.then(data => res.send(data))
+.catch(err => console.error(err));
+}
+else if(("bookTile" in req.query)){
+  bookTile = req.query.bookTile;
+
+Book.findAll({where:{bookTile:bookTile}})
+.then(data => res.send(data))
+.catch(err => console.error(err));
+}
+else {
+  const authorId = req.query.authorId;
+var condition = authorId? { authorId: { [Op.like]: `%${authorId}%` } } : null;
+  try {
+      Book.findAll({where:condition})
+      .then(data=>{ 
+          res.send(data);});
+  } catch (err) {
+      console.log(err);
+  }
+
+}
 
 }
 
@@ -58,8 +130,6 @@ exports.findAllReviewsOnBook=(req,res)=>{
 
 
 }
-
-
 exports.findBookId =(req,res)=>{
   const id = req.params.id;
   Book.findByPk(id)
@@ -78,20 +148,6 @@ exports.findBookId =(req,res)=>{
     });
   });
 }
-
-exports.findAllBooks = (req, res) => {
-  const authorName = req.query.authorName;
-var condition = authorName? { authorName: { [Op.like]: `%${authorName}%` } } : null;
-  try {
-      Book.findAll({where:condition})
-      .then(data=>{ 
-          res.send(data);});
-  } catch (err) {
-      console.log(err);
-  }
-};
-
-
 exports.updateBook = (req,res)=>{
   const id = req.params.id;
   Book.update(req.body,{
@@ -115,46 +171,6 @@ exports.updateBook = (req,res)=>{
   })
 }
 
-exports.findBookCategory=(req,res)=>{
-  const bookId = req.params.id;
-  Book.findByPk(bookId,{include:['category']})
-  .then(data=>{
-    res.send(data);
-})
-.catch(err => {
-  res.status(500).send({
-    message: "Error updating Book with id=" + id
-  });
-});
-
-}
-const { Op } = require("sequelize");
-
-exports.findBooksTitle = (req, res) => {
-  const booktile = req.query.booktile;
-  res.send(booktitle);
-var condition = booktile? { booktile: { [Op.like]: `%${booktile}%` } } : null;
-  try {
-      Book.findAll({where:condition})
-      
-     .then(data=>{ 
-          res.send(data);});
-  } catch (err) {
-      console.log(err);
-  }
-};
 
 
-
-exports.isReading = (req, res) => {
-  Book.findAll({ where: { isReading: true } })
-    .then(data => {
-      res.send(data);
-    })
-    .catch(err => {
-      res.status(500).send({
-        message:
-          err.message || "Some error occurred while retrieving tutorials."
-      });
-    });
-};
+  

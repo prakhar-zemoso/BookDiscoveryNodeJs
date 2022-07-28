@@ -1,22 +1,6 @@
 const Author = require("../Models/author");
 const book = require("../Models/book");
 const Category = require('../Models/category');
-// exports.getAllAuthor=(req,res,next)=>{
-//    Author.fetchAll(author=>{
-//         res.send(author);
-//     });
-    
-// };
-
-
-// exports.addAuthorData = (req,res)=>{
-
-//     const authorDetailEntered = new Author(req.body.name);
-//     authorDetailEntered.save();
-
-//     res.send(`Author Details has been entered Successfully`);
-// }
-
 
 exports.createAuthor = (req,res)=>{
 
@@ -45,7 +29,6 @@ exports.createAuthor = (req,res)=>{
     
 };
 
-//Retrieve all Tutorials/ find by author Name from the database:
 
 exports.findAllAuthors = (req, res) => {
     const authorName = req.query.authorName;
@@ -133,6 +116,18 @@ exports.delete = (req,res)=>{
 exports.bookAuthor = (req,res)=>{
   const authorId = req.params.id;
     Author.findByPk(authorId, { include: ["book"] })
+    .then((data) => {
+      res.send(data);
+    })
+    .catch((err) => {
+      console.log(">> Error while finding Author: ", err);
+    });
+  
+}
+
+exports.myBookAuthor = (req,res)=>{
+  const authorName = req.query.authorName;
+    Author.findAll({where:{authorName:authorName},  include: ["book"] })
     .then((data) => {
       res.send(data);
     })
