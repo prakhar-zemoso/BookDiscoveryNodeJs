@@ -30,6 +30,7 @@ exports.createAuthor = (req,res)=>{
 };
 
 
+<<<<<<< HEAD
 exports.findAllAuthors = (req, res) => {
     const authorName = req.query.authorName;
   var condition = authorName? { authorName: { [Op.like]: `%${authorName}%` } } : null;
@@ -139,3 +140,12 @@ exports.myBookAuthor = (req,res)=>{
 
 
 
+=======
+exports.addAuthorData = (req,res)=>{
+
+    const authorDetailEntered = new Author(req.body.name);
+    authorDetailEntered.save();
+
+    res.send(`Author Details has been entered Successfully`);
+}
+>>>>>>> ae764f9e72719c709c79e62c9a322f28a0b5e9df

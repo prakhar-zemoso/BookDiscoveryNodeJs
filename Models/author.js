@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 const Sequalize = require('sequelize');
 const sequalize = require('../util/database');
 
@@ -66,3 +67,44 @@ module.exports = author;
 //         return author;
 //     }
 // }
+=======
+const fs = require('fs');
+const path = require('path');
+
+
+
+module.exports = class Book{
+    constructor(name){
+        this.name = name;
+    }
+    save(){
+        const author = path.join(path.dirname(process.mainModule.filename),'dataFile','author.json');
+
+        fs.readFile(author,(err,fileContent)=>{
+            let authors = [];
+            if(!err){
+                authors = JSON.parse(fileContent);
+            }
+            authors.push(this);
+
+            fs.writeFile(author,JSON.stringify(authors),(err)=>{
+                console.log(err);
+            })
+        })
+
+    }
+
+    static fetchAll(cb){
+
+        const author = path.join(path.dirname(process.mainModule.filename),'dataFile','author.json');
+
+        fs.readFile(author,(err,fileContent)=>{
+            if(err){
+                cb([]);
+            }
+            cb(JSON.parse(fileContent));
+        })
+        return author;
+    }
+}
+>>>>>>> ae764f9e72719c709c79e62c9a322f28a0b5e9df
