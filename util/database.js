@@ -1,15 +1,3 @@
-// const mysql = require('mysql2');
-
-// const pool = mysql.createPool({
-//     host:'localhost',
-//     user:'root',
-//     database: 'BookDiscovery',
-//     password:'Mysql@123'
-
-// });
-
-// module.exports = pool.promise();
-
 const Sequalize = require('sequelize');
 
 const sequelize = new Sequalize('MYDB','root','Mysql@123',{
