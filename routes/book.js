@@ -6,9 +6,12 @@ const bookController = require('../controllers/bookController')
 
 //var books=[];
 
-router.get("/", bookController.getAllBooks);
+router.get("/", bookController.bookDetails);
+router.post('/',bookController.createBook);
+router.get('/:id',bookController.findBookId);
+router.put('/:id',bookController.updateBook);
+router.get("/book/reviews/:id", bookController.findAllReviewsOnBook);
 
-router.post('/',bookController.addBookData);
 
 module.exports = router;
 

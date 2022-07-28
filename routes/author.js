@@ -6,10 +6,13 @@ const authorController = require('../controllers/authorController');
 
 let author = [];
 
-router.get("/",authorController.getAllAuthors);
 
-
-router.post("/",authorController.addAuthorData);
+router.post("/",authorController.createAuthor);
+router.get("/books",authorController.myBookAuthor);
+router.get("/",authorController.findAllAuthors);
+router.get("/:id",authorController.findOne);
+router.put("/:id",authorController.update);
+router.delete("/:id",authorController.delete);
 
 
 module.exports = router;

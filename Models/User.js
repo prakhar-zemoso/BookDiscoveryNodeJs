@@ -1,17 +1,17 @@
 const Sequalize = require('sequelize');
 const sequalize = require('../util/database');
 
-const author = sequalize.define('author',{
-    authorId:{
+const user = sequalize.define('user',{
+    userId:{
         type: Sequalize.INTEGER,
         autoIncrement: true,
         allowNull: false,
         primaryKey : true
     },
 
-    authorName:{
+    name:{
         type: Sequalize.STRING
     }
 })
 
-module.exports = author;
+module.exports = user;
