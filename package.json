@@ -4,18 +4,24 @@
   "description": "BookDescription Using Nodejs as Backend",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "mocha",
     "dev": "npx nodemon index.js"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.20.0",
+    "chai-as-promised": "^7.1.1",
     "express": "^5.0.0-alpha.8",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.21.3"
+    "sequelize": "^6.21.3",
+    "sinon": "^14.0.0",
+    "sinon-chai": "^3.7.0"
   },
   "devDependencies": {
+    "chai": "^4.3.6",
+    "chai-http": "^4.3.0",
+    "mocha": "^10.0.0",
     "nodemon": "^2.0.19"
   }
 }

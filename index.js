@@ -72,10 +72,7 @@ app.use('/category',categoryRoute);
 
 app.use('/review',reviewRoute);
 
-
-
-
-
 app.use(express.json());
 app.listen(3030);
 
+module.exports = app;
